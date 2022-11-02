@@ -8,34 +8,27 @@ const TicTacToeV2 = () => {
   const [winTiles, setWinTiles] = useState([]);
 
   const checkWinner = (tileIdx) => {
-    tileLoc[tileIdx] = currentSymbol;
+    const tileDataTemp = { ...tileData, [tileIdx]: currentSymbol };
 
-    const crossLoc = Object.keys(tileLoc).filter(
-      (key) => tileLoc[key] === symbolX
-    );
-    const circleLoc = Object.keys(tileLoc).filter(
-      (key) => tileLoc[key] === symbolO
+    const currSymbolLoc = Object.keys(tileDataTemp).filter(
+      (key) => tileDataTemp[key] === currentSymbol
     );
 
     possibilities.forEach((p) => {
-      if (p.every((element) => circleLoc.includes(element.toString()))) {
-        setIsWin(true);
-        setWinTiles(p);
-      }
-      if (p.every((element) => crossLoc.includes(element.toString()))) {
+      if (p.every((element) => currSymbolLoc.includes(element.toString()))) {
         setIsWin(true);
         setWinTiles(p);
       }
     });
-    setTileData(() => tileLoc);
+    setTileData(tileDataTemp);
     setCurrentSymbol((currentState) =>
       currentState === symbolX ? symbolO : symbolX
     );
-  };
+  }
 
   return (
     <div className="board-container">
-      <span>{`${currentSymbol} turn`}</span>
+      <span className="text">{`${currentSymbol} turn`}</span>
       <div className="board">
         {[...Array(9)].map((tile, tileIdx) => {
           return (
@@ -54,9 +47,6 @@ const TicTacToeV2 = () => {
       <button
         className="restart"
         onClick={() => {
-          for (const key in tileLoc) {
-            delete tileLoc[key];
-          }
           setIsWin(false);
           setTileData({});
           setCurrentSymbol(symbolX);
@@ -67,9 +57,13 @@ const TicTacToeV2 = () => {
       </button>
 
       {isWin ? (
-        <span>{`${currentSymbol === symbolX ? symbolO : symbolX} WIN`}</span>
+        <span className="text">{`${
+          currentSymbol === symbolX ? symbolO : symbolX
+        } WIN`}</span>
       ) : (
-        <span>{`${Object.keys(tileLoc).length === 9 ? "DRAW" : ""}`}</span>
+        <span className="text">{`${
+          Object.keys(tileData).length === 9 ? "DRAW" : ""
+        }`}</span>
       )}
       <br />
     </div>
@@ -79,8 +73,6 @@ const TicTacToeV2 = () => {
 const symbolX = "X";
 const symbolO = "O";
 let currentSign = symbolX;
-
-const tileLoc = {};
 
 const possibilities = [
   [0, 1, 2],

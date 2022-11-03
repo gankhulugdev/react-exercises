@@ -20,9 +20,7 @@ export default function ToDoList() {
     setTodoItems((currentState) =>
       currentState.map((item, id) =>
         itemIdx === id
-          ? {
-              title: item.title,
-              createdDate: item.createdDate,
+          ? {...item,
               isCompleted: !item.isCompleted,
             }
           : item
@@ -57,10 +55,9 @@ export default function ToDoList() {
           ]
         : currentState.map((item, id) => {
             return id === currentId
-              ? {
-                  title: inputField,
-                  createdDate: item.createdDate,
-                  isCompleted: item.isCompleted,
+              ? {...item,
+                  title: inputField
+                  
                 }
               : item;
           });
@@ -112,7 +109,7 @@ export default function ToDoList() {
               </div>
               <div className="todo-btns">
                 <button onClick={() => isCompleted(itemIdx)}>
-                  <AiOutlineCheckCircle />
+                  <AiOutlineCheckCircle style={item.isCompleted && {color: "green"} }/>
                 </button>
 
                 <button onClick={() => editItem(itemIdx)}>

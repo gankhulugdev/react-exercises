@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { ImBin2, ImPencil } from "react-icons/im";
 import { BiSave } from "react-icons/bi";
 import { AiOutlineCheckCircle, AiOutlineFileAdd } from "react-icons/ai";
-
 import "./style.css";
 
 export default function ToDoList() {
@@ -11,60 +10,54 @@ export default function ToDoList() {
   // create a state that saves the value of the input field
   const [inputField, setInputField] = useState("");
   // create a state that saves if it's a new todo or edit
-  const [isNew, setIsNew] = useState(true);
 
-  const [currentId, setCurrentId] = useState(0);
+  const [editItemIdx, setEditItemIdx] = useState(-1);
 
   // create a function that changes the "isCompleted" status
-  const isCompleted = (itemIdx) => {
+  const complete = (itemIdx) => {
     setTodoItems((currentState) =>
       currentState.map((item, id) =>
-        itemIdx === id
-          ? {...item,
-              isCompleted: !item.isCompleted,
-            }
-          : item
+        itemIdx === id ? { ...item, isCompleted: !item.isCompleted } : item
       )
     );
   };
   // create a function that deletes the item from the list (i.e. update the todo items state)
   const deleteItem = (itemIdx) => {
     setTodoItems((currentState) =>
-      currentState.filter((item) => item !== todoItems[itemIdx])
+      currentState.filter((item, itemId) => itemId !== itemIdx)
     );
   };
   // create an edit function - better to do it at the end
   const editItem = (itemIdx) => {
-    setIsNew(false);
-    setCurrentId(itemIdx);
+    setEditItemIdx(itemIdx);
     setInputField(todoItems[itemIdx].title);
   };
 
   // create a submit function, that takes the input field value and add it to the todo items state
 
   const submit = (e) => {
-    setTodoItems((currentState) => {
-      return isNew
-        ? [
-            ...currentState,
-            {
-              title: inputField,
-              createdDate: new Date().toUTCString(),
-              isCompleted: false,
-            },
-          ]
-        : currentState.map((item, id) => {
-            return id === currentId
-              ? {...item,
-                  title: inputField
-                  
-                }
-              : item;
-          });
-    });
-    setIsNew(true);
-    setInputField("");
+    if(editItemIdx=== -1) {
+      setTodoItems((currentState)=> {
+        return [...currentState, {
+          title: inputField,
+          createdDate: new Date().toUTCString(),
+          isCompleted: false,
+        }]
+      })
+    }else{
+      setTodoItems((currentState)=>{
+        return currentState.map((item,id)=>{
+          return id === editItemIdx ? { ...item, title: inputField } : item;
+        })
+      })
+    }
+    cancelEdit();
   };
+
+  const cancelEdit = () => {
+    setEditItemIdx(-1);
+    setInputField("")
+  }
 
   return (
     <div className="todo-container">
@@ -73,7 +66,7 @@ export default function ToDoList() {
         className="form"
         onSubmit={(e) => {
           e.preventDefault();
-          inputField.length !== 0 ? submit(e) : alert("FIELD IS EMPTY")
+          inputField.length !== 0 ? submit(e) : alert("FIELD IS EMPTY");
         }}
       >
         <label>
@@ -83,7 +76,7 @@ export default function ToDoList() {
           />
         </label>
         <button className="submit-btn" type="submit">
-          {isNew ? (
+          {editItemIdx===-1 ? (
             <AiOutlineFileAdd style={{ color: "white" }} />
           ) : (
             <BiSave style={{ color: "white" }} />
@@ -107,19 +100,26 @@ export default function ToDoList() {
                   style={{ fontSize: "16px" }}
                 >{`created: ${item.createdDate}`}</div>
               </div>
-              <div className="todo-btns">
-                <button onClick={() => isCompleted(itemIdx)}>
-                  <AiOutlineCheckCircle style={item.isCompleted && {color: "green"} }/>
-                </button>
 
-                <button onClick={() => editItem(itemIdx)}>
-                  <ImPencil style={{ color: "blue" }} />
-                </button>
+              {editItemIdx !== itemIdx ? (
+                <div className="todo-btns">
+                  <button onClick={() => complete(itemIdx)}>
+                    <AiOutlineCheckCircle
+                      style={item.isCompleted && { color: "green" }}
+                    />
+                  </button>
 
-                <button onClick={() => deleteItem(itemIdx)}>
-                  <ImBin2 style={{ color: "red" }} />
-                </button>
-              </div>
+                  <button onClick={() => editItem(itemIdx)}>
+                    <ImPencil style={{ color: "blue" }} />
+                  </button>
+
+                  <button onClick={() => deleteItem(itemIdx)}>
+                    <ImBin2 style={{ color: "red" }} />
+                  </button>
+                </div>
+              ) : (
+                <button onClick={()=>{cancelEdit()}}>Cancel</button>
+              )}
             </div>
           );
         })}

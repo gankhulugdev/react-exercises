@@ -63,3 +63,16 @@ input {
 button {
     cursor: pointer;
 }
+
+.filter-btn {
+    padding: 3px 10px;
+    margin: 5px;
+    border-radius: 5px;
+    background-color: #bde0fe;
+    border: none;
+}
+
+.filter-btn:focus {
+    background-color: #023047;
+    color: white;
+}

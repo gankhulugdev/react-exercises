@@ -5,35 +5,40 @@ import { AiOutlineCheckCircle, AiOutlineFileAdd } from "react-icons/ai";
 import "./style.css";
 
 export default function ToDoList() {
-  // create a state that saves the todo items
+  // state that saves the todo items
   const [todoItems, setTodoItems] = useState([]);
-  // create a state that saves the value of the input field
+  // state that saves the value of the input field
   const [inputField, setInputField] = useState("");
-  // create a state that saves if it's a new todo or edit
-
+  // state that saves if it's a new todo or edit
   const [editItemIdx, setEditItemIdx] = useState(-1);
+  // state that 
+  const [isCompleted, setIsCompleted] = useState('')
+  // search field
+  const [searchField, setSearchField] = useState('')
 
-  // create a function that changes the "isCompleted" status
+
+  // function that changes the "isCompleted" status
   const complete = (itemIdx) => {
+    console.log(itemIdx)
     setTodoItems((currentState) =>
       currentState.map((item, id) =>
         itemIdx === id ? { ...item, isCompleted: !item.isCompleted } : item
       )
     );
   };
-  // create a function that deletes the item from the list (i.e. update the todo items state)
+  // function that deletes the item from the list (i.e. update the todo items state)
   const deleteItem = (itemIdx) => {
     setTodoItems((currentState) =>
       currentState.filter((item, itemId) => itemId !== itemIdx)
     );
   };
-  // create an edit function - better to do it at the end
+  //  edit function - better to do it at the end
   const editItem = (itemIdx) => {
     setEditItemIdx(itemIdx);
     setInputField(todoItems[itemIdx].title);
   };
 
-  // create a submit function, that takes the input field value and add it to the todo items state
+  // submit function, that takes the input field value and add it to the todo items state
 
   const submit = (e) => {
     if(editItemIdx=== -1) {
@@ -71,8 +76,8 @@ export default function ToDoList() {
       >
         <label>
           <input
-            value={inputField} //should read from the state
-            onChange={(e) => setInputField(e.target.value)} // should update the state
+            value={inputField} //read from the state
+            onChange={(e) => setInputField(e.target.value)} //  update the state
           />
         </label>
         <button className="submit-btn" type="submit">
@@ -83,10 +88,35 @@ export default function ToDoList() {
           )}
         </button>
       </form>
+            {/* save changes in localStorage  */}
+
+            {/* <button onClick={()=>{
+              localStorage.setItem('toDoList',)
+            }}>Save in localStorage</button> */}
+
       {/** list of to do items container */}
       <div className="todos">
         <span>The Todos</span>
-        {todoItems.map((item, itemIdx) => {
+        <div>
+          <label>
+            Search: 
+          <input
+            value={searchField} //read from the state
+            onChange={(e) => setSearchField(e.target.value)} //  update the state
+          />
+          </label>
+       
+           <button className="filter-btn" onClick={()=>{setIsCompleted('')}}>all</button>
+           <button className="filter-btn" onClick={()=>{setIsCompleted('completed')}}>completed</button>
+           <button className="filter-btn" onClick={()=>{setIsCompleted('inCompleted')}}>incompleted</button>
+        </div>
+       
+        {todoItems.filter((item)=>{
+          //  return item.title.includes(searchField)
+           return isCompleted === 'completed' ? (item.isCompleted && item.title.includes(searchField))  :isCompleted === 'inCompleted' ? (!item.isCompleted && item.title.includes(searchField)) : (item.title.includes(searchField))
+          
+         
+        }).map((item, itemIdx) => {
           return (
             <div className="todo" key={itemIdx}>
               <div>

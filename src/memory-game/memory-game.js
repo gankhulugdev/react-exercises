@@ -16,7 +16,7 @@ const MemoryGame = () => {
   const randomize = (arr) => arr.sort(() => (Math.random() > 0.5 ? 1 : -1));
 
   // const [randomizedCards, setRandomizedCards] = useState([...cards, ...cards]); for testing purpose
-  const [randomizedCards, setRandomizedCards] = useState([...randomize(cards), ...randomize(cards)]);
+  const [randomizedCards, setRandomizedCards] = useState([...randomize([...cards,...cards])]);
   const [flippedCard, setFlippedCard] = useState({});
   const [matchedCards, setMatchedCards] = useState({});
   const [currentPlayer, setCurrentPlayer] = useState("playerOne");

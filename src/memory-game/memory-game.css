@@ -1,0 +1,45 @@
+.game {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #511e8a;
+}
+.cards-container {
+
+    padding: 30px;
+    display: flex;
+    justify-content: space-between;
+}
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    width: 890px;
+}
+.player {
+    color: #ffbe0b;
+    font-size: 30px;
+}
+
+.score {
+    color: #ffbe0b;
+    font-size: 30px;
+}
+
+.start-btn {
+    background-color: #511e8a;
+    border: none;
+}
+
+.card {
+    margin: 5px;
+    border-radius: 5px;
+    border: none
+}
+
+
+img {
+    object-fit: contain;
+    width: 200px;
+    height: 100px;
+}

@@ -2,9 +2,9 @@ import React from "react";
 import {BsStar} from "react-icons/bs"
 import {BsStarFill} from "react-icons/bs"
 
-const Star = (props) => {
+const Star = ({style}) => {
     return(
-        props.style === "filled" ? <BsStarFill/>: <BsStar/>
+        style === "filled" ? <BsStarFill style={{color: 'orange'}}/>: <BsStar/>
         
     )
 }

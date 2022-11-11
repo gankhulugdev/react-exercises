@@ -1,8 +1,8 @@
 import React from "react";
 
-const Language = (props) => {
+const Language = ({className, language}) => {
     return (
-        <img className={props.className} src={props.language.src} alt={props.language.code}/>
+        <img className={className} src={language.src} alt={language.code}/>
     )
 }
 

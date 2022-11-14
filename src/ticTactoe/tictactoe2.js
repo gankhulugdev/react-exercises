@@ -8,17 +8,19 @@ const TicTacToeV2 = () => {
   const [winTiles, setWinTiles] = useState([]);
 
   useEffect(() => {
-    //check winner
-    possibilities.forEach((possibility) => {
-      if (possibility.every((pNum) => tileData[pNum] === currentSymbol)) {
-        setIsWin(true);
-        setWinTiles(possibility);
-      }
-    });
-
+    //check winner 
+    if(Object.keys(tileData).length >= 5){
+      possibilities.forEach((possibility) => {
+        if (possibility.every((pNum) => tileData[pNum] === currentSymbol)) {
+          setIsWin(true);
+          setWinTiles(possibility);
+        }
+      });
+    }
+    
     setCurrentSymbol((currentState) =>
       currentState === symbolX ? symbolO : symbolX
-    );
+    )
   }, [tileData]);
 
   return (
@@ -48,7 +50,7 @@ const TicTacToeV2 = () => {
         onClick={() => {
           setIsWin(false);
           setTileData({});
-          setCurrentSymbol(symbolX);
+          setCurrentSymbol(symbolO);
           setWinTiles([]);
         }}
       >

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./tictactoe.css";
 
 const TicTacToeV2 = () => {
@@ -7,24 +7,19 @@ const TicTacToeV2 = () => {
   const [isWin, setIsWin] = useState(false);
   const [winTiles, setWinTiles] = useState([]);
 
-  const checkWinner = (tileIdx) => {
-    const tileDataTemp = { ...tileData, [tileIdx]: currentSymbol };
-
-    const currSymbolLoc = Object.keys(tileDataTemp).filter(
-      (key) => tileDataTemp[key] === currentSymbol
-    );
-
-    possibilities.forEach((p) => {
-      if (p.every((element) => currSymbolLoc.includes(element.toString()))) {
+  useEffect(() => {
+    //check winner
+    possibilities.forEach((possibility) => {
+      if (possibility.every((pNum) => tileData[pNum] === currentSymbol)) {
         setIsWin(true);
-        setWinTiles(p);
+        setWinTiles(possibility);
       }
     });
-    setTileData(tileDataTemp);
+
     setCurrentSymbol((currentState) =>
       currentState === symbolX ? symbolO : symbolX
     );
-  }
+  }, [tileData]);
 
   return (
     <div className="board-container">
@@ -36,7 +31,11 @@ const TicTacToeV2 = () => {
               className={`${winTiles.includes(tileIdx) ? "win" : ""} square`}
               key={tileIdx}
               onClick={() => {
-                !tileData[tileIdx] && !isWin && checkWinner(tileIdx);
+                !tileData[tileIdx] &&
+                  !isWin &&
+                  setTileData((currState) => {
+                    return { ...currState, [tileIdx]: currentSymbol };
+                  });
               }}
             >
               {tileData[tileIdx]}

@@ -36,10 +36,6 @@ const LanguagePicker = () => {
   const [isShown, setIsShown] = useState(false);
   const [selectedLanguage, setLanguage] = useState(languages[0]);
 
-  const handleClick = () => {
-    setIsShown((currentState) => !currentState);
-  };
-
   return (
     <div className="languageContainer">
       <div onClick={() => setIsShown((currentState) => !currentState)}>

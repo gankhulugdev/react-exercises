@@ -1,0 +1,67 @@
+.main-container {
+    display: flex;
+    padding: 3px;
+    background-color:#f2e9e4;
+}
+
+.form-container{
+    background-color: #4a4e69;
+    padding: 0.5rem;
+    border-radius: 1rem;
+    margin: 1rem;
+    
+}
+
+.fields {
+    display: flex;
+    flex-direction: column;
+    width: 15.5rem;
+}
+
+.input-field {
+    width: 14.5rem;
+}
+
+.cards {
+    display: flex;
+    /* align-items: flex-start; */
+    flex-wrap: wrap;
+  
+
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+   background-color: #9a8c98;
+
+    width: 20rem;
+    padding: 1rem;
+    border-radius: 1rem;
+    margin: 1rem;
+    
+    
+
+}
+
+.user-info {
+   text-align: center;
+   padding: 1.5rem;
+   background-color: #c9ada7;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-around;
+    background-color: #ddbea9;
+    padding: 1.5rem 0;
+/* background-color: black;     */
+}
+
+
+.button {
+    margin: 0 3rem;
+    background: none;
+    border: none;
+    
+}

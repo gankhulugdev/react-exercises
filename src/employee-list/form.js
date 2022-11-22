@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
+import avatar1 from "./assets/avatar1.png";
+import avatar2 from "./assets/avatar2.png";
+import avatar3 from "./assets/avatar3.png";
+import avatar4 from "./assets/avatar4.png";
+import avatar5 from "./assets/avatar5.png";
+import avatar6 from "./assets/avatar6.png";
+import avatar7 from "./assets/avatar7.png";
+import avatar8 from "./assets/avatar8.png";
 
-const Form = ({
-  setEmployeeList,
-  employeeList,
-  setEditId,
-  avatars,
-  editId,
-}) => {
+const Form = ({ setEmployeeList, editEmployee }) => {
   const emptyDataForm = {
     firstname: "",
     lastname: "",
@@ -23,16 +25,12 @@ const Form = ({
   const [formData, setFormData] = useState(emptyDataForm);
 
   useEffect(() => {
-    if (editId !== -1) {
-      employeeList.forEach((emp) => {
-        if (editId === emp.id) {
-          setFormData(emp);
-        }
-      });
+    if (editEmployee) {
+      setFormData(editEmployee);
     } else {
       setFormData(emptyDataForm);
     }
-  }, [editId]);
+  }, [editEmployee]);
 
   const onFormchange = (e) => {
     const fieldName = e.target.name;
@@ -49,7 +47,7 @@ const Form = ({
   };
 
   const submit = () => {
-    if (editId === -1) {
+    if (editEmployee === null) {
       setEmployeeList((currState) => [
         ...currState,
         {
@@ -59,60 +57,75 @@ const Form = ({
         },
       ]);
     } else {
-      setEmployeeList(currState =>
-        currState.map(employee =>
-          editId === employee.id ? { ...employee, ...formData} : employee
+      setEmployeeList((currState) =>
+        currState.map((employee) =>
+          editEmployee.id === employee.id
+            ? { ...employee, ...formData }
+            : employee
         )
       );
-      setEditId(-1);
     }
 
     setFormData(emptyDataForm);
   };
 
   return (
-    <form className="form-container"
+    <form
+      className="form-container"
       onSubmit={(e) => {
         e.preventDefault();
         submit();
       }}
     >
       <div className="fields">
-      {[
-        // {label: 'Forst Name', value: 'fieldName'},
-        "First name",
-        "Last name",
-        "Role",
-        "Company",
-        "Address",
-        "Apt Suite",
-        "City",
-        "State",
-        "Zip",
-        "Phone",
-      ].map((field, fieldIdx) => {
-        const fieldName = field.replace(" ", "").toLowerCase();
-        return (
-          <label key={fieldIdx}>
-            {field}:
-            <input
-              required
-              className="input-field"
-              name={fieldName}
-              value={formData[fieldName]}
-              onChange={(e) => {
-                onFormchange(e);
-              }}
-            />
-          </label>
-        );
-      })}
-
+        {[
+          // {label: 'Forst Name', value: 'fieldName'},
+          "First name",
+          "Last name",
+          "Role",
+          "Company",
+          "Address",
+          "Apt Suite",
+          "City",
+          "State",
+          "Zip",
+          "Phone",
+        ].map((field, fieldIdx) => {
+          const fieldName = field.replace(" ", "").toLowerCase();
+          return (
+            <label key={fieldIdx}>
+              {field}:
+              <input
+                maxLength="15"
+                required
+                className="input-field"
+                name={fieldName}
+                value={formData[fieldName]}
+                onChange={(e) => {
+                  onFormchange(e);
+                }}
+              />
+            </label>
+          );
+        })}
       </div>
-      
-      <button type="submit">{editId === -1 ? "submit" : "save"}</button>
+
+      <button type="submit" style={{ cursor: "pointer", marginTop: "1rem" }}>
+        {editEmployee === null ? "submit" : "save"}
+      </button>
     </form>
   );
 };
+
+const avatars = [
+  avatar1,
+  avatar2,
+  avatar3,
+  avatar4,
+  avatar5,
+  avatar6,
+  avatar7,
+  avatar8,
+];
 
 export default Form;

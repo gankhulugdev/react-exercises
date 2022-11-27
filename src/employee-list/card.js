@@ -1,11 +1,16 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { RiDeleteBin5Fill } from "react-icons/ri";
 import { CiEdit } from "react-icons/ci";
-const Card = ({ setEmployeeList, employee, setEditEmployee, editEmployee }) => {
+const Card = ({ setEmployeeList, employee, setEditEmployee, editEmployee, employeeList}) => {
+
+  const navigate = useNavigate();
   return (
-    <div className="card">
+    <div className="card-employee">
       <div className="user-info">
-        <img
+        <img onClick={()=>{
+          navigate(`${employee.id}`,{state: employeeList})
+        }}
           src={employee.icon}
           alt={employee.icon}
           style={{
@@ -13,6 +18,7 @@ const Card = ({ setEmployeeList, employee, setEditEmployee, editEmployee }) => {
             borderRadius: "50%",
             width: "100px",
             height: "100px",
+            cursor: 'pointer'
           }}
         />
         <div

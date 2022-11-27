@@ -21,17 +21,15 @@ const EmployeeList = () => {
 
   return (
     <div className="main-container">
-      <div >
-        <Form
-          setEmployeeList={setEmployeeList}
-          editEmployee={editEmployee}
-        />
+      <div>
+        <Form setEmployeeList={setEmployeeList} editEmployee={editEmployee} />
       </div>
 
       <div className="cards">
         {employeeList.map((employee, employeeIdx) => {
           return (
             <Card
+              employeeList={employeeList}
               setEmployeeList={setEmployeeList}
               setEditEmployee={setEditEmployee}
               employee={employee}

@@ -1,96 +1,6 @@
 .App {  
 }
 
-.main {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-/* style related to profile card */
-.profile {
-  width: 400px;
-  height: 100px;
-  border-radius: 15px;
-  display: flex;
-  align-items: center;
-  background-color: #2e3337;
-  margin: 10px;
-
-}
-
-.initialLetter {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 20px;
-  font-weight: 600;
-  color: #f0d4ee;
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background-color: #8a1f72;
-  margin: 0 10px; 
-}
-.nameTitle {
-  display: flex;
-  flex-direction: column;
-  font-size: 22px;
-  margin: 0 5px;  
-}
-
-.name {
-  color: white;
-  font-weight: 700;
-}
-
-.title {
-  color: #a5a7a8;
-  font-weight: 500;
-}
-
-
-/* style related to language picker */
-.languageContainer {
-  display: flex;
-  width: 320px;
-  flex-wrap: wrap;
-  justify-content: center;
-  
-}
-
-.selected {
-  width: 300px;
-  height: 200px;
-  object-fit: cover;
-}
-.selected:hover {
-  cursor: pointer;
-}
-
-.notSelected {
-  width: 100px;
-  height: calc(100px/1.5);
-  object-fit: cover;
-}
-.notSelected:hover {
-  cursor: pointer;
-}
-
-/* style related to status-picker */
-.Active {
-  background-color: green;
-}
-
-.Away {
-  background-color: yellow;
-}
-
-.Offline {
-  background-color: #717171;
-}
-
-
-
 
 .arrow {
   display: none;
@@ -108,54 +18,11 @@
 }
 
 
-.description {
-  display: flex;
-  justify-content: space-between;
-}
+
 
 .btn {
   color: rgb(130, 159, 129);
   font-size: 50px;
-}
-
-
-
-/*  */
-.house {  
-  font-size: 15px;
-  width: 300px;
-  height: 450px;
-  margin: 10px;
-}
-
-.house:hover + .arrow{
-  cursor: pointer;
-
-}
-
-img {
-  object-fit: cover;
-  width: 100%;
-  height: calc(60%);
-  border-radius: 5%;
-}
-
-p{
-  margin: 0px auto;
-  color: #717171;
-  line-height: 19px;
-}
-
-.rates{
-  
-}
-
-.location {
-  font-weight: 600;
-}
-
-.price {
-  margin-top: 6px;
 }
 
 .App-logo {

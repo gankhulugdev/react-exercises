@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import avatar1 from "./assets/avatar1.png";
 import avatar2 from "./assets/avatar2.png";
 import avatar3 from "./assets/avatar3.png";
@@ -9,18 +9,20 @@ import avatar7 from "./assets/avatar7.png";
 import avatar8 from "./assets/avatar8.png";
 
 const Form = ({ setEmployeeList, editEmployee }) => {
-  const emptyDataForm = {
-    firstname: "",
-    lastname: "",
-    role: "",
-    company: "",
-    address: "",
-    aptsuite: "",
-    city: "",
-    state: "",
-    zip: "",
-    phone: "",
-  };
+  const emptyDataForm = useMemo(()=>{
+    return {
+      firstname: "",
+      lastname: "",
+      role: "",
+      company: "",
+      address: "",
+      aptsuite: "",
+      city: "",
+      state: "",
+      zip: "",
+      phone: "",
+    }
+  } ,[])
 
   const [formData, setFormData] = useState(emptyDataForm);
 
@@ -30,7 +32,7 @@ const Form = ({ setEmployeeList, editEmployee }) => {
     } else {
       setFormData(emptyDataForm);
     }
-  }, [editEmployee]);
+  }, [editEmployee,emptyDataForm]);
 
   const onFormchange = (e) => {
     const fieldName = e.target.name;
@@ -96,7 +98,7 @@ const Form = ({ setEmployeeList, editEmployee }) => {
             <label key={fieldIdx}>
               {field}:
               <input
-                maxLength="15"
+                maxLength="20"
                 required
                 className="input-field"
                 name={fieldName}

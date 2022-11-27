@@ -7,10 +7,10 @@ const Card = ({ setEmployeeList, employee, setEditEmployee, editEmployee, employ
   const navigate = useNavigate();
   return (
     <div className="card-employee">
-      <div className="user-info">
-        <img onClick={()=>{
+      <div onClick={()=>{
           navigate(`${employee.id}`,{state: employeeList})
-        }}
+        }} className="user-info">
+        <img 
           src={employee.icon}
           alt={employee.icon}
           style={{

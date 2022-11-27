@@ -48,7 +48,22 @@
    text-align: center;
    padding: 1.5rem;
    background-color: #c9ada7;
+   
 }
+
+.user-info:hover {
+    text-align: center;
+    padding: 1.5rem;
+    background-color: #4a4e69;
+    cursor: pointer;
+ }
+
+ .user-info-detail {
+    text-align: center;
+    padding: 1.5rem;
+    background-color: #c9ada7;
+    
+ }
 
 .buttons {
     display: flex;

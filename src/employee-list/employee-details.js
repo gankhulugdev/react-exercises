@@ -1,16 +1,21 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
 
 const EmployeeDetails = () => {
   const { employeeId } = useParams();
   const { state } = useLocation();
   const navigate = useNavigate();
+  const [employee, setEmployee] = useState({});
 
-  const employee = state.find(({ id }) => id === parseInt(employeeId));
+  useEffect(() => {
+    const employee = state.find(({ id }) => id === parseInt(employeeId));
+    setEmployee(employee);
+  }, []);
 
   return (
     <div className="card-employee">
-      <button style={{color: 'black', border: 'none', backgroundColor: '#f2e9e4'}}
+      <button
+        style={{ color: "black", border: "none", backgroundColor: "#f2e9e4" }}
         onClick={() => {
           navigate(-1);
         }}
@@ -18,7 +23,7 @@ const EmployeeDetails = () => {
         back to list
       </button>
 
-      <div className="user-info">
+      <div className="user-info-detail">
         <img
           src={employee.icon}
           alt={employee.icon}

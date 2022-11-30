@@ -7,12 +7,15 @@ const TicTacToeV2 = () => {
   const [winTiles, setWinTiles] = useState([]);
 
   useEffect(() => {
-
     if (Object.keys(tileData).length >= 6) {
       possibilities.forEach((possibility) => {
         if (
-          possibility.every((pNum) => tileData[pNum] === (tileData.currentSymbol===symbolX ? symbolO: symbolX))
-        ) {          
+          possibility.every(
+            (pNum) =>
+              tileData[pNum] ===
+              (tileData.currentSymbol === symbolX ? symbolO : symbolX)
+          )
+        ) {
           setIsWin(true);
           setWinTiles(possibility);
         }
@@ -69,7 +72,6 @@ const TicTacToeV2 = () => {
         }`}</span>
       )}
 
-      {JSON.stringify(tileData)}
       <br />
     </div>
   );

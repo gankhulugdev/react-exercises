@@ -1,5 +1,5 @@
 import "./memory-game.css";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 import icon0 from "./assets/card.png";
 import icon1 from "./assets/clock.png";
@@ -21,9 +21,10 @@ const MemoryGame = () => {
   );
   const [flippedCard, setFlippedCard] = useState({});
   const [matchedCards, setMatchedCards] = useState({});
-  const [currentPlayer, setCurrentPlayer] = useState("playerOne");
   const [score, setScore] = useState({ playerOne: 0, playerTwo: 0 });
   const [isWin, setIsWin] = useState(false);
+
+  const currentPlayer = useRef("playerOne");
 
   useEffect(() => {
     if (Object.keys(flippedCard).length === 2) {
@@ -37,14 +38,13 @@ const MemoryGame = () => {
         }));
         setScore((currentState) => ({
           ...currentState,
-          [currentPlayer]: currentState[currentPlayer] + 1,
+          [currentPlayer.current]: currentState[currentPlayer.current] + 1,
         }));
 
         setFlippedCard({});
       } else {
-        setCurrentPlayer((currentState) =>
-          currentState === "playerOne" ? "playerTwo" : "playerOne"
-        );
+        currentPlayer.current =
+          currentPlayer.current === "playerOne" ? "playerTwo" : "playerOne";
         setTimeout(() => setFlippedCard({}), 1000);
       }
     }
@@ -69,7 +69,9 @@ const MemoryGame = () => {
                 ? "Player two wins"
                 : "Draw"
             }`
-          : `Turn ${currentPlayer === "playerOne" ? "Player I" : "Player II"}`}
+          : `Turn ${
+              currentPlayer.current === "playerOne" ? "Player I" : "Player II"
+            }`}
       </div>
       <div className="cards-container">
         <div className="score">Player I : {score.playerOne}</div>
@@ -84,12 +86,13 @@ const MemoryGame = () => {
                     !matchedCards[idx] &&
                     setFlippedCard((currState) => ({
                       ...currState,
-                      [idx]: { ...card, player: currentPlayer },
+                      [idx]: { ...card, player: currentPlayer.current },
                     }));
                 }}
               >
                 {flippedCard[idx] || matchedCards[idx] ? (
                   <img
+                    alt=""
                     src={`${
                       matchedCards[idx]
                         ? matchedCards[idx].src
@@ -97,7 +100,7 @@ const MemoryGame = () => {
                     }`}
                   />
                 ) : (
-                  <img src={icon0} />
+                  <img alt={icon0} src={icon0} />
                 )}
               </button>
             );
@@ -110,9 +113,9 @@ const MemoryGame = () => {
       <button
         className="start-btn"
         onClick={() => {
+          currentPlayer.current("playerOne");
           setScore({ playerOne: 0, playerTwo: 0 });
           setIsWin(false);
-          setCurrentPlayer("playerOne");
           setMatchedCards({});
           setFlippedCard({});
 
@@ -121,7 +124,7 @@ const MemoryGame = () => {
           });
         }}
       >
-        <img className="start-btn" src={startButton} />
+        <img alt={startButton} className="start-btn" src={startButton} />
       </button>
     </div>
   );

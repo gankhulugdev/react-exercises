@@ -2,30 +2,26 @@ import React, { useState, useEffect } from "react";
 import "./tictactoe.css";
 
 const TicTacToeV2 = () => {
-  const [currentSymbol, setCurrentSymbol] = useState(currentSign);
-  const [tileData, setTileData] = useState({});
+  const [tileData, setTileData] = useState({ currentSymbol: symbolX });
   const [isWin, setIsWin] = useState(false);
   const [winTiles, setWinTiles] = useState([]);
 
   useEffect(() => {
-    //check winner 
-    if(Object.keys(tileData).length >= 5){
+
+    if (Object.keys(tileData).length >= 6) {
       possibilities.forEach((possibility) => {
-        if (possibility.every((pNum) => tileData[pNum] === currentSymbol)) {
+        if (
+          possibility.every((pNum) => tileData[pNum] === (tileData.currentSymbol===symbolX ? symbolO: symbolX))
+        ) {          
           setIsWin(true);
           setWinTiles(possibility);
         }
       });
     }
-    
-    setCurrentSymbol((currentState) =>
-      currentState === symbolX ? symbolO : symbolX
-    )
   }, [tileData]);
 
   return (
     <div className="board-container">
-      <span className="text">{`${currentSymbol} turn`}</span>
       <div className="board">
         {[...Array(9)].map((tile, tileIdx) => {
           return (
@@ -36,7 +32,12 @@ const TicTacToeV2 = () => {
                 !tileData[tileIdx] &&
                   !isWin &&
                   setTileData((currState) => {
-                    return { ...currState, [tileIdx]: currentSymbol };
+                    return {
+                      ...currState,
+                      [tileIdx]: tileData.currentSymbol,
+                      currentSymbol:
+                        tileData.currentSymbol === symbolX ? symbolO : symbolX,
+                    };
                   });
               }}
             >
@@ -49,8 +50,7 @@ const TicTacToeV2 = () => {
         className="restart"
         onClick={() => {
           setIsWin(false);
-          setTileData({});
-          setCurrentSymbol(symbolO);
+          setTileData({ currentSymbol: symbolX });
           setWinTiles([]);
         }}
       >
@@ -59,13 +59,17 @@ const TicTacToeV2 = () => {
 
       {isWin ? (
         <span className="text">{`${
-          currentSymbol === symbolX ? symbolO : symbolX
+          tileData.currentSymbol === symbolX ? symbolO : symbolX
         } WIN`}</span>
       ) : (
         <span className="text">{`${
-          Object.keys(tileData).length === 9 ? "DRAW" : ""
+          Object.keys(tileData).length === 10
+            ? "DRAW"
+            : `${tileData.currentSymbol} turn`
         }`}</span>
       )}
+
+      {JSON.stringify(tileData)}
       <br />
     </div>
   );
@@ -73,7 +77,6 @@ const TicTacToeV2 = () => {
 
 const symbolX = "X";
 const symbolO = "O";
-let currentSign = symbolX;
 
 const possibilities = [
   [0, 1, 2],

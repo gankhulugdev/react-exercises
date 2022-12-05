@@ -29,6 +29,13 @@ import ToDoList from "./toDo-List";
 import ImageSlider from "./image-slider/image-slider";
 import EmployeeDetails from "./employee-list/employee-details";
 import EmployeePageLayout from "./employee-list/employee-page-layout";
+import ApiCall from "./api-call-playground";
+import Joke from "./chuck-norris-joke";
+import GitHub from "./github-followers";
+import GitHubProfileCard from "./github-followers/profile-card";
+import GitHubPageLayout from "./github-followers/github-page-layout";
+import MovieDetails from "./movie";
+
 
 function App() {
   // const navigate = useNavigate()
@@ -59,6 +66,14 @@ function App() {
             <Route path="/star-rating" element={<StarRating />} />
             <Route path="/status-picker" element={<StatusPicker />} />
             <Route path="/tic-tac-toe" element={<TicTacToeV2 />} />
+            <Route path="/api-call" element={<ApiCall />} /> 
+            <Route path="/joke" element={<Joke />} /> 
+            <Route path="/github-profile" element={<GitHubPageLayout />}>  
+              <Route index element={<GitHub/>} />
+              <Route path=":profileId" element={<GitHubProfileCard/>} />
+            </Route>  
+            <Route path="/movie" element ={<MovieDetails/>}/>        
+            <Route path="*" element={'404 Not Found'} />
           </Route>
         </Routes>
         {/* <AirBnb/> */}

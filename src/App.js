@@ -28,13 +28,14 @@ import ToDoList from "./toDo-List";
 // import LocalStoragePlayground from "./localStorage";
 import ImageSlider from "./image-slider/image-slider";
 import EmployeeDetails from "./employee-list/employee-details";
-import EmployeePageLayout from "./employee-list/employee-page-layout";
 import ApiCall from "./api-call-playground";
 import Joke from "./chuck-norris-joke";
 import GitHub from "./github-followers";
 import GitHubProfileCard from "./github-followers/profile-card";
 import GitHubPageLayout from "./github-followers/github-page-layout";
 import MovieDetails from "./movie";
+import CounterUseReducer from "./counterReducer/counterReducer";
+import Shop from "./shopping-list";
 
 
 function App() {
@@ -54,7 +55,7 @@ function App() {
             <Route path="/color-picker" element={<ColorPicker />} />
             <Route path="/todo-list" element={<ToDoList />} />
             <Route path="/counter" element={<Counter />} />
-            <Route path="/employee-list" element={<EmployeePageLayout />}>
+            <Route path="/employee-list">
               <Route index element={<EmployeeList />} />
               <Route path=":employeeId" element={<EmployeeDetails />} />
             </Route>
@@ -72,7 +73,9 @@ function App() {
               <Route index element={<GitHub/>} />
               <Route path=":profileId" element={<GitHubProfileCard/>} />
             </Route>  
-            <Route path="/movie" element ={<MovieDetails/>}/>        
+            <Route path="/movie" element ={<MovieDetails/>}/>     
+            <Route path="/counter-reducer" element={<CounterUseReducer/>}/>   
+            <Route path="/shop" element={<Shop/>}/>
             <Route path="*" element={'404 Not Found'} />
           </Route>
         </Routes>

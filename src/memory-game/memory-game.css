@@ -37,8 +37,7 @@
     border: none
 }
 
-
-img {
+.card-img {
     object-fit: contain;
     width: 200px;
     height: 100px;

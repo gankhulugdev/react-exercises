@@ -91,7 +91,7 @@ const MemoryGame = () => {
                 }}
               >
                 {flippedCard[idx] || matchedCards[idx] ? (
-                  <img
+                  <img className="card-img"
                     alt=""
                     src={`${
                       matchedCards[idx]
@@ -100,7 +100,7 @@ const MemoryGame = () => {
                     }`}
                   />
                 ) : (
-                  <img alt={icon0} src={icon0} />
+                  <img className="card-img" alt={icon0} src={icon0} />
                 )}
               </button>
             );
@@ -113,7 +113,7 @@ const MemoryGame = () => {
       <button
         className="start-btn"
         onClick={() => {
-          currentPlayer.current("playerOne");
+          currentPlayer.current="playerOne";
           setScore({ playerOne: 0, playerTwo: 0 });
           setIsWin(false);
           setMatchedCards({});
@@ -124,7 +124,7 @@ const MemoryGame = () => {
           });
         }}
       >
-        <img alt={startButton} className="start-btn" src={startButton} />
+        <img alt={startButton} className=" card-img start-btn" src={startButton} />
       </button>
     </div>
   );

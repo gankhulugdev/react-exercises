@@ -32,7 +32,6 @@ import ApiCall from "./api-call-playground";
 import Joke from "./chuck-norris-joke";
 import GitHub from "./github-followers";
 import GitHubProfileCard from "./github-followers/profile-card";
-import GitHubPageLayout from "./github-followers/github-page-layout";
 import MovieDetails from "./movie";
 import CounterUseReducer from "./counterReducer/counterReducer";
 import Shop from "./shopping-list";
@@ -69,7 +68,7 @@ function App() {
             <Route path="/tic-tac-toe" element={<TicTacToeV2 />} />
             <Route path="/api-call" element={<ApiCall />} /> 
             <Route path="/joke" element={<Joke />} /> 
-            <Route path="/github-profile" element={<GitHubPageLayout />}>  
+            <Route path="/github-profile">  
               <Route index element={<GitHub/>} />
               <Route path=":profileId" element={<GitHubProfileCard/>} />
             </Route>  

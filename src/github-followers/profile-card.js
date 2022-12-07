@@ -61,7 +61,7 @@ const GitHubProfileCard = () => {
           src={accountInfo.avatar_url}
           alt={accountInfo.avatar_url}
         />
-        <div style={{ fontSize: "25px", height: "70px" }}>
+        <div style={{ fontSize: "25px", height: "70px", width: '260px', textAlign: 'center' }}>
           {accountInfo.name}
         </div>
         <div style={{ color: "gray", paddingBottom: "15px" }}>

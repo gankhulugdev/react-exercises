@@ -1,0 +1,14 @@
+.side-bar-container {
+    display: flex;
+    align-items: flex-start;
+}
+
+.left-side-bar{
+    width: 10rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.navi-btn{
+    padding: 0.5rem 0;
+}

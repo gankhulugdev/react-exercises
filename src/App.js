@@ -35,6 +35,8 @@ import GitHubProfileCard from "./github-followers/profile-card";
 import MovieDetails from "./movie";
 import CounterUseReducer from "./counterReducer/counterReducer";
 import Shop from "./shopping-list";
+import HTMLTable from "./table";
+import UserController from "./user-crud";
 
 
 function App() {
@@ -75,30 +77,13 @@ function App() {
             <Route path="/movie" element ={<MovieDetails/>}/>     
             <Route path="/counter-reducer" element={<CounterUseReducer/>}/>   
             <Route path="/shop" element={<Shop/>}/>
+            <Route path="table" element={<HTMLTable/>}/>
+            <Route path="/user-crud" element={<UserController/>}/>
             <Route path="*" element={'404 Not Found'} />
           </Route>
         </Routes>
-        {/* <AirBnb/> */}
-        {/* <DemoUseState /> */}
-        {/* <DemoObject/> */}
-        {/* <FireWork/> */}
-        {/* <Counter/> */}
-        {/* <StatusPicker/> */}
-        {/* <LanguagePicker/> */}
-        {/* <NameField/> */}
-        {/* <ProfileCard/> */}
-        {/* <StarRating/> */}
-        {/* <TicTacToe /> */}
-        {/* <TicTacToeV2/> */}
-        {/* <SampleData/> */}
-        {/* <MemoryGame/> */}
-        {/* <ControlledComp/> */}
-        {/* <LocalStoragePlayground/> */}
-        {/* <ImageSlider/> */}
-        {/* <Clock/> */}
-        {/* <EmployeeList /> */}
-        {/* <ColorPicker/> */}
-        {/* <BMI/> */}
+
+
       </BrowserRouter>
     </div>
   );

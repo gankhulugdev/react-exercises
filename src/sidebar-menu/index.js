@@ -27,7 +27,9 @@ const SideBarMenu = () => {
           "Github-Profile",
           "Movie",
           "Counter-Reducer",
-          "Shop"
+          "Shop",
+          "Table",
+          "User-CRUD"
         ].map((name, nameIdx) => {
           return (
             <button className="navi-btn"

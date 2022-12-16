@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import { Badge, Space, Table, InputNumber } from "antd";
 import { ShoppingCartOutlined } from "@ant-design/icons";
 
@@ -6,18 +6,9 @@ const ShoppingCart = ({ cart, updateCart }) => {
   const [dataSource, setDataSource] = useState([]);
 
   useEffect(() => {
-    setDataSource(() => cart.map((item) => ({ ...item, key: item.sku })));
+    setDataSource(() => cart.items.map((item) => ({ ...item, key: item.sku })));
   }, [cart]);
 
-  const totalPrice = useMemo(
-    () => cart.reduce((accumulator, item) => item.totalPrice + accumulator, 0),
-    [cart]
-  );
-
-  const totalQuantity = useMemo(
-    () => cart.reduce((accumulator, item) => item.quantity + accumulator, 0),
-    [cart]
-  );
 
   const columns = [
     {
@@ -45,6 +36,7 @@ const ShoppingCart = ({ cart, updateCart }) => {
               defaultValue={item.quantity}
               value={item.quantity}
               onChange={(value) => {
+                value && value >=0 && value <= item.available &&
                 updateCart({
                   type: "changedByOne",
                   data: {
@@ -53,6 +45,8 @@ const ShoppingCart = ({ cart, updateCart }) => {
                     quantity: value,
                     quantityLimit: item.available - value,
                     totalPrice: item.price * value,
+                    differenceQty: value - item.quantity,
+                    differencePrice: item.price * value - item.totalPrice
                   },
                 });
               }}
@@ -84,14 +78,14 @@ const ShoppingCart = ({ cart, updateCart }) => {
 
   return (
     <div className="costumer-card">
-      {totalQuantity ? (
+      {cart.totalQty ? (
         <div>
           <div className="costumer-card-top">
             <div>
               <span>Costumer Cart</span>
             </div>
             <Space size="large">
-              <Badge color="#faad14" count={totalQuantity}>
+              <Badge color="#faad14" count={cart.totalQty}>
                 <ShoppingCartOutlined style={{ fontSize: "40px" }} />
               </Badge>
             </Space>
@@ -100,10 +94,10 @@ const ShoppingCart = ({ cart, updateCart }) => {
             <Table dataSource={dataSource} columns={columns} />;
           </div>
 
-          <div> {`Cart total: $${totalPrice}`}</div>
+          <div> {`Cart total: $${cart.totalPrice}`}</div>
         </div>
       ) : (
-        "Your Cart Is Empty"
+        <div>Your Cart Is Empty</div>
       )}
     </div>
   );

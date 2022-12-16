@@ -1,12 +1,16 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState,useContext } from "react";
 import { IoCart } from "react-icons/io5";
 import { Rate, InputNumber } from "antd";
+import { ShoppingCartContext } from ".";
 
-const ProductInfo = ({ product, updateCart, cart }) => {
+
+const ProductInfo = ({ product }) => {
   const [quantity, setQuantity] = useState(1);
 
+  const {updateCart, cart} = useContext(ShoppingCartContext)
+
   const [productInCart] = useMemo(
-    () => cart?.filter((item) => item.sku === product.sku),
+    () => cart.items?.filter((item) => item.sku === product.sku),
     [cart]
   );
 

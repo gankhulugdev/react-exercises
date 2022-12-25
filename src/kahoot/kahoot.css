@@ -1,0 +1,111 @@
+.answer-result-frame{
+    width: 100%;
+    height: 15vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.frame-correct {
+    background-color: #66bf39;
+}
+
+.frame-wrong {
+    background-color: #ff3355;
+}
+
+.kahoot-next-btn{
+    padding: 15px 50px;
+    margin: 2rem 2rem 0 0;
+    font-size: 14px;
+    font-weight: 600;
+    background-color: white;
+    box-shadow: rgb(0 0 0 / 15%) 0px 2px 4px, rgb(0 0 0 / 25%) 0px -4px inset;
+    border: none;
+    border-radius: 2px;
+}
+
+.kahoot-next-btn:hover{
+    background-color: #eaeaeb;
+    box-shadow: rgb(0 0 0 / 15%) 0px 1px 2px,
+}
+
+.answer-result{
+    font-size: 24px;
+    font-weight: 600;
+    color: white;
+    padding: 1rem 3rem;
+    border-radius: 0.3rem;
+}
+
+
+
+
+.correct-result {
+    background-color: #52992e;
+}
+
+.wrong-result {
+    background-color: #cc2944;
+}
+
+.time-counter{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 56px;
+    background-color: #eaf1fa;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    padding-bottom: 5px;
+    margin: 4rem 4rem;
+}
+
+.answer {
+    display: flex;
+    height: 17vh;
+    align-items: center;
+    justify-content: space-between;
+    padding: 30px 2rem;
+    border-radius: 5px;
+    border-top: 2px solid rgba(0, 0, 0, 0.2);
+    border-left: 2px solid rgba(0, 0, 0, 0.2);
+    border-right: 2px solid rgba(0, 0, 0, 0.2);
+    box-shadow: rgb(0 0 0 / 20%) 0px -6px 0px 0px inset;
+    font-size: 25px;
+    font-weight: 700;
+    color: white;
+}
+.current-question-number{
+    display: flex;
+    justify-content: center;
+    font-size: 32px;
+    font-weight: 700; 
+    background-color: rgb(234, 241, 250);
+    border-radius: 20px;
+    height: 8.5vh;
+}
+
+.current-question{
+    height: 8.5vh;
+    display: flex;
+    justify-content: center;
+    font-size: 25px;
+    font-weight: 700;
+    padding: 0 2rem;
+    
+}
+.bg-yellow {
+    background-color: #d89e00;
+}
+.bg-blue {
+    background-color: #1368ce;
+}
+.bg-green {
+    background-color: #26890c;
+}
+.bg-red {
+    background-color: #e21b3c;
+}

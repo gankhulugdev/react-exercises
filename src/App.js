@@ -37,7 +37,10 @@ import CounterUseReducer from "./counterReducer/counterReducer";
 import Shop from "./shopping-list";
 import HTMLTable from "./table";
 import UserController from "./user-crud";
-
+import EditUser from "./user-crud/editUser";
+import AppGitHUB from "./github-user";
+import ThemeApp from "./theme-app";
+import Kahoot from "./kahoot";
 
 function App() {
   // const navigate = useNavigate()
@@ -68,22 +71,26 @@ function App() {
             <Route path="/star-rating" element={<StarRating />} />
             <Route path="/status-picker" element={<StatusPicker />} />
             <Route path="/tic-tac-toe" element={<TicTacToeV2 />} />
-            <Route path="/api-call" element={<ApiCall />} /> 
-            <Route path="/joke" element={<Joke />} /> 
-            <Route path="/github-profile">  
-              <Route index element={<GitHub/>} />
-              <Route path=":profileId" element={<GitHubProfileCard/>} />
-            </Route>  
-            <Route path="/movie" element ={<MovieDetails/>}/>     
-            <Route path="/counter-reducer" element={<CounterUseReducer/>}/>   
-            <Route path="/shop" element={<Shop/>}/>
-            <Route path="table" element={<HTMLTable/>}/>
-            <Route path="/user-crud" element={<UserController/>}/>
-            <Route path="*" element={'404 Not Found'} />
+            <Route path="/api-call" element={<ApiCall />} />
+            <Route path="/joke" element={<Joke />} />
+            <Route path="/github-profile">
+              <Route index element={<GitHub />} />
+              <Route path=":profileId" element={<GitHubProfileCard />} />
+            </Route>
+            <Route path="/movie" element={<MovieDetails />} />
+            <Route path="/counter-reducer" element={<CounterUseReducer />} />
+            <Route path="/shop" element={<Shop />} />
+            <Route path="table" element={<HTMLTable />} />
+            <Route path="/user-crud">
+              <Route index element={<UserController />} />
+              <Route path=":userId" element={<EditUser/>} />
+            </Route>
+            <Route path="github-users" element={<AppGitHUB/>} />
+            <Route path="theme-app" element={<ThemeApp/>} />
+            <Route path="kahoot" element={<Kahoot/>}/>
+            <Route path="*" element={"404 Not Found"} />
           </Route>
         </Routes>
-
-
       </BrowserRouter>
     </div>
   );
